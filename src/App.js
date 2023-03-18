@@ -1,12 +1,20 @@
+import Questions from "./components/Questions"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Layout from "./components/Layout"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Smith Ringtho</h1>
-      </header>
-    </div>
-  );
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="questions" element={<Questions />} />
+        </Route>
+      </Routes>
+    
+    </BrowserRouter>
+    
+  )
 }
 
 export default App;
