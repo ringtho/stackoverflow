@@ -3,9 +3,13 @@ import { Link } from "react-router-dom"
 import { getQuestions, postQuestion } from "../api"
 
 
-export default function Questions(){
-    const [question, setQuestion] = useState([])
-    const [formData, setFormData] = useState({title: "", description: "", stack: ""})
+export default function Questions(props){
+  const [question, setQuestion] = useState([])
+  const [formData, setFormData] = useState({
+    title: "", 
+    description: "", 
+    stack: ""
+  })
 
   useEffect(()=>{
 
@@ -41,9 +45,8 @@ export default function Questions(){
   const handleSubmit = (e) => {
     e.preventDefault()
     async function postData(){
-      const token = null
       try {
-        const data = await postQuestion(formData, token)
+        const data = await postQuestion(formData, props.token)
         console.log(data)
       } catch(err){
         console.log(err)

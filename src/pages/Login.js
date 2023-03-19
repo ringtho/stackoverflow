@@ -1,10 +1,11 @@
 import React, { useState } from "react"
+import { Navigate } from "react-router-dom"
 import { loginUser } from "../api"
 
 
-export default function Login(){
+export default function Login(props){
     const [formData, setFormData] = useState({username:"", password: ""})
-    const [token, setToken] = useState(null)
+    const { setToken }  = props
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -22,9 +23,8 @@ export default function Login(){
             setToken(data.access_token)
         }
         getUser()
+        
     }
-
-    console.log(token)
 
     return (
         <div className="login-container">
