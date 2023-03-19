@@ -28,8 +28,6 @@ export default function Question(){
         )
     })
 
-    // console.log(questionDetails)
-
     return (
         <>
         {question ?
@@ -38,12 +36,8 @@ export default function Question(){
                 <p>{questionDetails.description}</p>
                 <p>{questionDetails.stack}</p>
                 <small>@{questionDetails.author} || {questionDetails.created_on}</small>
-
-            
             </div> 
-            : <h2>Loading...</h2>
-
-            
+            : <h2>Loading...</h2> 
         }
         {answersEl}
         </>

@@ -9,10 +9,7 @@ import { useState } from "react"
 function App() {
   const [token, setToken] = useState(null)
 
-  console.log(token)
-
   return (
-
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -21,9 +18,7 @@ function App() {
           <Route path="questions/:id" element={<Question />} />
         </Route>
       </Routes>
-    
     </BrowserRouter>
-    
   )
 }
 
