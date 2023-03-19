@@ -45,13 +45,8 @@ export default function Questions(props){
   const handleSubmit = (e) => {
     e.preventDefault()
     async function postData(){
-      try {
         const data = await postQuestion(formData, props.token)
         console.log(data)
-      } catch(err){
-        console.log(err)
-      }
-      
     }
     postData()
   }
