@@ -7,3 +7,22 @@ export async function getQuestions(id){
     const data = res.json()
     return data
 }
+
+export async function postQuestion(formData, token){
+    const url = `http://127.0.0.1:5000/questions`
+    try {
+        const res = await fetch(url, 
+            {
+                method : "post", 
+                body : JSON.stringify(formData), 
+                headers: {
+                    "Authorization": `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            })
+        const data = res.json()
+        return data
+    }catch(err){
+        return err
+    }
+}

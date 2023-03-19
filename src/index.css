@@ -37,10 +37,12 @@ h1,h2,h3,h4,p {
 .questions {
   padding-block: 16px;
   line-height: 24px;
+  border: 1px solid black;
 }
 
 .question,
-.answer {
+.answer,
+.login-container {
   padding: 16px;
   line-height: 24px;
 }
@@ -50,10 +52,15 @@ h1,h2,h3,h4,p {
 }
 
 .question-form > input,
+.login-form > input,
 button {
   width: 100%;
   padding: 8px 16px;
   margin-bottom: 8px;
+}
+
+.login-form {
+  width: 100%;
 }
 
 .question-form {

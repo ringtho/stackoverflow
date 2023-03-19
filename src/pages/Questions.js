@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import { Link } from "react-router-dom"
-import { getQuestions } from "../api"
+import { getQuestions, postQuestion } from "../api"
 
 
 export default function Questions(){
@@ -19,7 +19,9 @@ export default function Questions(){
   const display = question.map((question) => {
     return (
       <div key={question.id} className="questions">
-        <Link to={`${question.id}`}><h1 className="title">{question.title}</h1></Link>
+        <Link to={`${question.id}`}>
+          <h1 className="title">{question.title}</h1>
+        </Link>
         <p>{question.description}</p>
         <p>{question.stack}</p>
         <small>@{question.author} || {question.created_on}</small>
@@ -38,7 +40,17 @@ export default function Questions(){
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    async function postData(){
+      const token = null
+      try {
+        const data = await postQuestion(formData, token)
+        console.log(data)
+      } catch(err){
+        console.log(err)
+      }
+      
+    }
+    postData()
   }
 
   return (
@@ -50,21 +62,24 @@ export default function Questions(){
             type="text" 
             placeholder="Title"
             value={formData.title}
-            onChange={handleChange} 
+            onChange={handleChange}
+            required 
           />
           <input 
             name="description" 
             type="text" 
             placeholder="description"
             value={formData.description}
-            onChange={handleChange} 
+            onChange={handleChange}
+            required 
           />
           <input 
             name="stack" 
             type="text" 
             placeholder="Stacks"
             value={formData.stack}
-            onChange={handleChange} 
+            onChange={handleChange}
+            required 
           />
           <button>Submit</button> 
         </form>
