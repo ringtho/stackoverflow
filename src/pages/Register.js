@@ -18,7 +18,6 @@ export default function Register(){
                 [name]: value 
             }
         })
-
     }
 
     const handleSubmit = (e) => {
