@@ -20,9 +20,23 @@ export async function postQuestion(formData, token){
                     "Content-Type": "application/json"
                 }
             })
-        const data = res.json()
+        const data = await res.json()
         return data
     }catch(err){
         return err
     }
+}
+
+export async function loginUser(formData){
+    const url = `http://127.0.0.1:5000/auth/login`
+    const res = await fetch(url, {
+        method: "post",
+        body: JSON.stringify(formData),
+        headers : {
+            "Content-Type": "application/json"
+        }
+    })
+    
+    const data = await res.json()
+    return data
 }
