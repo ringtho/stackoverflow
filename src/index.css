@@ -29,3 +29,34 @@ h1,h2,h3,h4,p {
   color: #ffffff;
   text-decoration: none;
 }
+
+.app {
+  padding: 16px;
+}
+
+.questions {
+  padding-block: 16px;
+  line-height: 24px;
+}
+
+.question,
+.answer {
+  padding: 16px;
+  line-height: 24px;
+}
+
+.title {
+  padding-bottom: 8px;
+}
+
+.question-form > input,
+button {
+  width: 100%;
+  padding: 8px 16px;
+  margin-bottom: 8px;
+}
+
+.question-form {
+  padding-bottom: 8px;
+}
+
