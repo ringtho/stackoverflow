@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
 import { Link } from "react-router-dom"
+import { getQuestions } from "../api"
 
 
 export default function Questions(){
@@ -7,9 +8,12 @@ export default function Questions(){
     const [formData, setFormData] = useState({title: "", description: "", stack: ""})
 
   useEffect(()=>{
-    fetch(`http://127.0.0.1:5000/questions`)
-      .then(res => res.json())
-      .then(data => setQuestion(data.questions))
+
+    async function questionsData(){
+      const data = await getQuestions()
+      setQuestion(data.questions)
+    }
+    questionsData()
   }, [])
 
   const display = question.map((question) => {
@@ -32,10 +36,15 @@ export default function Questions(){
     } )
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(formData)
+  }
+
   return (
     <div className="app">
         <header className="app-container">
-        <form className="question-form">
+        <form className="question-form" onSubmit={handleSubmit}>
           <input 
             name="title" 
             type="text" 

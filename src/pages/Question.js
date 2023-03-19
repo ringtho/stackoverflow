@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react"
 import { useParams } from "react-router-dom"
+import { getQuestions } from "../api"
 
 
 export default function Question(){
@@ -7,13 +8,11 @@ export default function Question(){
     const params = useParams()
 
     useEffect(()=>{
-        const url = `http://127.0.0.1:5000/questions/${params.id}`
-        fetch(url)
-            .then(res => res.json())
-            .then(data =>  {
-                setQuestion(data)
-                console.log(data)
-            })
+        async function questionsData(){
+            const data = await getQuestions(params.id)
+            setQuestion(data)
+        }
+        questionsData()
 
     }, [params])
 
