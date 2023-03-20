@@ -73,3 +73,8 @@ button {
   padding-bottom: 8px;
 }
 
+.error {
+  color: red;
+  padding: 16px 0;
+}
+

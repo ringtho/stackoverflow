@@ -1,5 +1,7 @@
 import React, { useState } from "react"
+import { Navigate, Link } from "react-router-dom"
 import { registerUser } from "../api"
+import Error from "../components/Error"
 
 
 export default function Register(){
@@ -12,6 +14,9 @@ export default function Register(){
         password:""
     })
 
+    const [user, setUser] = useState(null)
+    const [error, setError] = useState(null)
+
     const handleOnChange = (e) => {
         const { value, name } = e.target
         setFormData(prevState => {
@@ -21,18 +26,23 @@ export default function Register(){
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
-
-        async function getUserData(){
-            const data = await registerUser(formData)
-            console.log(data)
-        }
-        getUserData()
+        const user = await registerUser(formData)
+        if(user?.user){
+            setUser(user)
+        }else if (user?.error){
+            setError(user.error)
+        }    
     }
+
+    console.log(user)
+    console.log(error)
 
     return (
         <div className="login-container">
+            {error && <Error error={error} />}
+            {user && <Navigate to="/login" />}
             <form className="login-form" onSubmit={handleSubmit}>
                 <input 
                     type="text"
@@ -52,14 +62,14 @@ export default function Register(){
                     type="text"
                     name="firstname" 
                     placeholder="First Name" 
-                    value={formData.firstName}
+                    value={formData.firstname}
                     onChange={handleOnChange} 
                 />
                 <input 
                     type="text"
                     name="lastname" 
                     placeholder="Last Name" 
-                    value={formData.lastName}
+                    value={formData.lastname}
                     onChange={handleOnChange} 
                 />
                  <input 
@@ -77,6 +87,8 @@ export default function Register(){
                     onChange={handleOnChange}
                 />
                 <button>Register</button>
+                <p>Already a member?</p>
+                <Link to="../login">Login</Link>
             </form>
         </div>
     )
