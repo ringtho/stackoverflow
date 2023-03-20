@@ -36,9 +36,6 @@ export default function Register(){
         }    
     }
 
-    console.log(user)
-    console.log(error)
-
     return (
         <div className="login-container">
             {error && <Error error={error} />}
