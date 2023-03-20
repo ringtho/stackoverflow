@@ -20,6 +20,7 @@ export default function Login(props){
         async function getUser(){
             const data = await loginUser(formData)
             setToken(data.access_token)
+            console.log(data)
         }
         getUser()
         

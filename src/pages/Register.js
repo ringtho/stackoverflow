@@ -1,12 +1,13 @@
 import React, { useState } from "react"
+import { registerUser } from "../api"
 
 
 export default function Register(){
     const [formData, setFormData] = useState({
         username:"",
         email:"", 
-        firstName:"", 
-        lastName: "", 
+        firstname:"", 
+        lastname: "", 
         gender: "",
         password:""
     })
@@ -22,10 +23,13 @@ export default function Register(){
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
-    }
 
-    console.log(formData)
+        async function getUserData(){
+            const data = await registerUser(formData)
+            console.log(data)
+        }
+        getUserData()
+    }
 
     return (
         <div className="login-container">
@@ -46,14 +50,14 @@ export default function Register(){
                 />
                 <input 
                     type="text"
-                    name="firstName" 
+                    name="firstname" 
                     placeholder="First Name" 
                     value={formData.firstName}
                     onChange={handleOnChange} 
                 />
                 <input 
                     type="text"
-                    name="lastName" 
+                    name="lastname" 
                     placeholder="Last Name" 
                     value={formData.lastName}
                     onChange={handleOnChange} 
