@@ -3,7 +3,6 @@ import { Navigate, Link } from "react-router-dom"
 import { registerUser } from "../api"
 import Error from "../components/Error"
 
-
 export default function Register(){
     const [formData, setFormData] = useState({
         username:"",
@@ -46,14 +45,16 @@ export default function Register(){
                     name="username" 
                     placeholder="Username" 
                     value={formData.username}
-                    onChange={handleOnChange} 
+                    onChange={handleOnChange}
+                    required 
                 />
                 <input 
                     type="email"
                     name="email" 
                     placeholder="Email" 
                     value={formData.email}
-                    onChange={handleOnChange} 
+                    onChange={handleOnChange}
+                    required 
                 />
                 <input 
                     type="text"
@@ -82,6 +83,7 @@ export default function Register(){
                     placeholder="Password" 
                     value={formData.password} 
                     onChange={handleOnChange}
+                    required
                 />
                 <button>Register</button>
                 <p>Already a member?</p>
