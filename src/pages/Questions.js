@@ -1,19 +1,17 @@
-import React, {useEffect, useState} from "react"
-import { Link } from "react-router-dom"
-import { getQuestions, postQuestion } from "../api"
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { getQuestions, postQuestion } from '../api'
 
-
-export default function Questions(props){
+export default function Questions (props) {
   const [question, setQuestion] = useState([])
   const [formData, setFormData] = useState({
-    title: "", 
-    description: "", 
-    stack: ""
+    title: '',
+    description: '',
+    stack: ''
   })
 
-  useEffect(()=>{
-
-    async function questionsData(){
+  useEffect(() => {
+    async function questionsData () {
       const data = await getQuestions()
       setQuestion(data.questions)
     }
@@ -34,19 +32,20 @@ export default function Questions(props){
   })
 
   const handleChange = (e) => {
-    const {name, value} = e.target
+    const { name, value } = e.target
     setFormData(prevState => {
-      return {...prevState,
-        [name] : value
-        }
-    } )
+      return {
+        ...prevState,
+        [name]: value
+      }
+    })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    async function postData(){
-        const data = await postQuestion(formData, props.token)
-        console.log(data)
+    async function postData () {
+      const data = await postQuestion(formData, props.token)
+      console.log(data)
     }
     postData()
   }
@@ -55,31 +54,31 @@ export default function Questions(props){
     <div className="app">
         <header className="app-container">
         <form className="question-form" onSubmit={handleSubmit}>
-          <input 
-            name="title" 
-            type="text" 
+          <input
+            name="title"
+            type="text"
             placeholder="Title"
             value={formData.title}
             onChange={handleChange}
-            required 
+            required
           />
-          <input 
-            name="description" 
-            type="text" 
+          <input
+            name="description"
+            type="text"
             placeholder="description"
             value={formData.description}
             onChange={handleChange}
-            required 
+            required
           />
-          <input 
-            name="stack" 
-            type="text" 
+          <input
+            name="stack"
+            type="text"
             placeholder="Stacks"
             value={formData.stack}
             onChange={handleChange}
-            required 
+            required
           />
-          <button>Submit</button> 
+          <button>Submit</button>
         </form>
         {display}
         </header>

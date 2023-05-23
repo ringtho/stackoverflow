@@ -1,25 +1,25 @@
-import React, { useState } from "react"
-import { Navigate , Link} from "react-router-dom"
-import { loginUser } from "../api"
-import Error from "../components/Error"
+import React, { useState } from 'react'
+import { Navigate, Link } from 'react-router-dom'
+import { loginUser } from '../api'
+import Error from '../components/Error'
 
+export default function Login (props) {
+  const [formData, setFormData] = useState({username:"", password: ""})
+  const [user, setUser] = useState(null)
+  const [error, setError] = useState(null)
+  const { setToken } = props
 
-export default function Login(props){
-    const [formData, setFormData] = useState({username:"", password: ""})
-    const [user, setUser] = useState(null)
-    const [error, setError] = useState(null)
-    const { setToken }  = props
+  const handleOnChange = (e) => {
+    const { name, value } = e.target
+    setFormData(prevState => {
+      return {
+        ...prevState,
+        [name]: value
+      }
+    })
+  }
 
-    const handleOnChange = (e) => {
-        const { name, value } = e.target
-        setFormData(prevState => {
-            return {...prevState,
-                [name] : value
-            }
-        })
-    }
-
-    const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
         e.preventDefault()
         const user = await loginUser(formData)
         if(user?.access_token){

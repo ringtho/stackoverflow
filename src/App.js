@@ -1,13 +1,12 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Questions from "./pages/Questions"
-import Question from "./pages/Question"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import Layout from "./components/Layout"
-import { useState } from "react"
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Questions from './pages/Questions'
+import Question from './pages/Question'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Layout from './components/Layout'
+import React, { useState } from 'react'
 
-
-function App() {
+function App () {
   const [token, setToken] = useState(null)
 
   return (
@@ -24,4 +23,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

@@ -1,87 +1,88 @@
-import React, { useState } from "react"
-import { Navigate, Link } from "react-router-dom"
-import { registerUser } from "../api"
-import Error from "../components/Error"
+import React, { useState } from 'react'
+import { Navigate, Link } from 'react-router-dom'
+import { registerUser } from '../api'
+import Error from '../components/Error'
 
-export default function Register(){
-    const [formData, setFormData] = useState({
-        username:"",
-        email:"", 
-        firstname:"", 
-        lastname: "", 
-        gender: "",
-        password:""
+export default function Register () {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    firstname: '',
+    lastname: '',
+    gender: '',
+    password: ''
+  })
+
+  const [user, setUser] = useState(null)
+  const [error, setError] = useState(null)
+
+  const handleOnChange = (e) => {
+    const { value, name } = e.target
+    setFormData(prevState => {
+      return {
+        ...prevState,
+        [name]: value
+      }
     })
+  }
 
-    const [user, setUser] = useState(null)
-    const [error, setError] = useState(null)
-
-    const handleOnChange = (e) => {
-        const { value, name } = e.target
-        setFormData(prevState => {
-            return {...prevState,
-                [name]: value 
-            }
-        })
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const user = await registerUser(formData)
+    if (user?.user) {
+      setUser(user)
+    } else if (user?.error) {
+      setError(user.error)
     }
+  }
 
-    const handleSubmit = async(e) => {
-        e.preventDefault()
-        const user = await registerUser(formData)
-        if(user?.user){
-            setUser(user)
-        }else if (user?.error){
-            setError(user.error)
-        }    
-    }
-
-    return (
+  return (
         <div className="login-container">
             {error && <Error error={error} />}
             {user && <Navigate to="/login" />}
             <form className="login-form" onSubmit={handleSubmit}>
-                <input 
+                <input
                     type="text"
-                    name="username" 
-                    placeholder="Username" 
+                    name="username"
+                    placeholder="Username"
                     value={formData.username}
                     onChange={handleOnChange}
-                    required 
+                    required
                 />
-                <input 
+                <input
                     type="email"
-                    name="email" 
-                    placeholder="Email" 
+                    name="email"
+                    placeholder="Email"
                     value={formData.email}
                     onChange={handleOnChange}
-                    required 
+                    required
                 />
-                <input 
+                <input
                     type="text"
-                    name="firstname" 
-                    placeholder="First Name" 
+                    name="firstname"
+                    placeholder="First Name"
                     value={formData.firstname}
-                    onChange={handleOnChange} 
+                    onChange={handleOnChange}
                 />
-                <input 
+                <input
                     type="text"
-                    name="lastname" 
-                    placeholder="Last Name" 
+                    name="lastname"
+                    placeholder="Last Name"
                     value={formData.lastname}
-                    onChange={handleOnChange} 
+                    onChange={handleOnChange}
                 />
-                 <input 
+                 <input
                     type="text"
-                    name="gender" 
-                    placeholder="Gender" 
+                    name="gender"
+                    placeholder="Gender"
                     value={formData.gender}
-                    onChange={handleOnChange} 
+                    onChange={handleOnChange}
                 />
-                <input 
-                    type="password" 
+                <input
+                    type="password"
                     name="password"
-                    placeholder="Password" 
-                    value={formData.password} 
+                    placeholder="Password"
+                    value={formData.password}
                     onChange={handleOnChange}
                     required
                 />
@@ -90,5 +91,5 @@ export default function Register(){
                 <Link to="../login">Login</Link>
             </form>
         </div>
-    )
+  )
 }
