@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Navigate, Link } from 'react-router-dom'
 import { loginUser } from '../api'
 import Error from '../components/Error'
-
+import PropTypes from 'prop-types'
 export default function Login (props) {
-  const [formData, setFormData] = useState({username:"", password: ""})
+  const [formData, setFormData] = useState({ username: '', password: '' })
   const [user, setUser] = useState(null)
   const [error, setError] = useState(null)
   const { setToken } = props
@@ -20,35 +20,34 @@ export default function Login (props) {
   }
 
   const handleSubmit = async (e) => {
-        e.preventDefault()
-        const user = await loginUser(formData)
-        if(user?.access_token){
-            setUser(user)
-            setToken(user.access_token)
-        }else if (user?.error){
-            setError(user.error)
-        }
+    e.preventDefault()
+    const user = await loginUser(formData)
+    if (user?.access_token) {
+      setUser(user)
+      setToken(user.access_token)
+    } else if (user?.error) {
+      setError(user.error)
     }
+  }
 
-    return (
-        
+  return (
         <div className="login-container">
             {user?.access_token && <Navigate to="/questions" /> }
             {error && <Error error={error} />}
             <form className="login-form" onSubmit={handleSubmit}>
-                <input 
+                <input
                     type="text"
-                    name="username" 
-                    placeholder="Username" 
+                    name="username"
+                    placeholder="Username"
                     value={formData.username}
-                    onChange={handleOnChange} 
+                    onChange={handleOnChange}
                     required
                 />
-                <input 
-                    type="password" 
+                <input
+                    type="password"
                     name="password"
-                    placeholder="Password" 
-                    value={formData.password} 
+                    placeholder="Password"
+                    value={formData.password}
                     onChange={handleOnChange}
                     required
                 />
@@ -58,5 +57,9 @@ export default function Login (props) {
             </form>
 
         </div>
-    )
+  )
+}
+
+Login.propTypes = {
+  setToken: PropTypes.func
 }

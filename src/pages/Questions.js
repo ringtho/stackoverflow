@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getQuestions, postQuestion } from '../api'
+import PropTypes from 'prop-types'
 
-export default function Questions (props) {
+export default function Questions ({ token }) {
   const [question, setQuestion] = useState([])
   const [formData, setFormData] = useState({
     title: '',
@@ -44,7 +45,7 @@ export default function Questions (props) {
   const handleSubmit = (e) => {
     e.preventDefault()
     async function postData () {
-      const data = await postQuestion(formData, props.token)
+      const data = await postQuestion(formData, token)
       console.log(data)
     }
     postData()
@@ -84,4 +85,8 @@ export default function Questions (props) {
         </header>
     </div>
   )
+}
+
+Questions.propTypes = {
+  token: PropTypes.string
 }
